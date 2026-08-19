@@ -9,34 +9,6 @@
 
 **When the user provides a design handoff (HTML file, Figma link, screenshot, or markdown spec), always file a GitHub issue to track it** — even if you implement it immediately. The issue should link to or summarize the handoff, reference the relevant files, and be added to the project board. This ensures the handoff is traceable and can be revisited if the implementation drifts.
 
-## Updating Module Content
-
-Module content lives in `content/modules/` as markdown files. Each file has a YAML front matter block with these fields relevant to exercises:
-
-- **`googleDocUrl`** — the URL of the Google Docs workbook participants open. Update this when a new version of the workbook is created. Use the base doc URL without heading anchors (e.g. `https://docs.google.com/document/d/DOC_ID/edit?tab=t.0`).
-- **`exercises`** — a list of `title` + `description` pairs shown in the UI below the workbook button. Descriptions should be **concise 1–2 sentence summaries** of what the exercise asks — enough for a participant to understand the prompt without listing every sub-question. See module-2.md for the reference style.
-
-The full exercise content (detailed prompts, sub-questions, values lists, etc.) lives in the Google Doc workbook and in `~/git/dri_course_development/<course>/0N-*/exercises.md`. The deployed descriptions are intentionally shorter. Optional exercises (marked as optional in exercises.md) should be omitted from the `exercises` list entirely.
-
-If the user refers to a module without specifying the course (e.g. "module 3"), ask which course they mean: DRI Your Career (`module-N.md`), EM Survival Guide (`em-module-N.md`), or Navigating the AI Shift (`ai-module-N.md`).
-
-### Syncing module body content from dri_course_development
-
-When a PR merges in `dri_course_development` that changes a `module.md` file, use the sync script rather than manually diffing and editing:
-
-```bash
-cd ~/git/dri_course_development
-./scripts/sync-to-platform.sh --course em   # or dri, ai, or omit for all
-```
-
-This preserves the frontmatter in each destination file and replaces the body from the source repo, then creates a PR. The local `dri_course_development` repo must be up to date (`git pull`) before running.
-
-### Updating exercises for a module
-
-1. Update `googleDocUrl` if the workbook doc has changed.
-2. Rewrite each `description` as a short summary matching the module-2 style. Omit optional exercises.
-3. Run `npm run sync-modules` locally to verify the content syncs without errors, then open a PR.
-
 ## Production Database
 
 **Never write to the production database when a PR can accomplish the same thing.**
@@ -131,6 +103,10 @@ Default workflow at the start of any code change:
 This applies even when the user says "go ahead" or "ship it" — interpret that as "open the PR," not "commit to main." If you've already started editing on `main` by mistake, stop, create a branch, and move the changes there before committing.
 
 Exception: docs-only changes the user explicitly asks to commit directly (e.g. "just push this CLAUDE.md update to main") are fine, but ask first if it isn't obvious.
+
+## Full-stack changes
+
+When a change touches both the API and the UI, land them in a single PR. The PR description should note which side was tested and how.
 
 ## PR and Issue Workflow
 
