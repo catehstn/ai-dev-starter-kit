@@ -51,7 +51,6 @@ The thinking behind all this, on [cate.blog](https://cate.blog):
 - [Useful AI skills for engineering leaders](https://cate.blog/2026/06/09/useful-ai-skills-for-engineering-leaders/) — why skills, and how to think about them
 - [The Value of Getting Closer to the Work](https://cate.blog/2026/06/23/the-value-of-getting-closer-to-the-work/)
 - [High Throughput, Low Completion](https://cate.blog/2026/05/05/high-throughput-low-completion/) — shipping lots of PRs vs finishing things
-- [Who's the Admin, Me or Claude?](https://cate.blog/2026/04/07/whos-the-admin-me-or-claude/)
 
 ## Coming next (v2)
 
