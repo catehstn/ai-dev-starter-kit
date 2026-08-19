@@ -9,8 +9,6 @@ Broad, structured audits you dispatch on a **capable, long-running model** (e.g.
 - **Output gets filed**, not left in the chat — write it to a doc (e.g. `docs/audits/YYYY-MM-DD-<topic>.md`) so it's reviewable, diff-able, and each finding can become an issue for a cheaper model to pick up.
 - **When it's useful:** when you have a nagging "I'm not sure our X is good enough" and don't want to grind through it by hand — test coverage, security, correctness, performance. High signal, and the output pays for itself as executable work.
 
-> Tip: if you find yourself putting off a broad audit because you're busy, that's exactly the moment to dispatch one — the cost of asking is tiny and the report often surfaces things you'd never have gone looking for.
-
 ---
 
 ## Example 1 — test coverage / reliability
