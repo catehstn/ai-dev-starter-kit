@@ -30,5 +30,3 @@ _Run the audit on the capable model; the filed report becomes work cheaper model
 > 5. **Performance** (fetch waterfalls, rendering, bundle, caching)
 
 _Each concern is its own filed section. Adapt the sub-bullets to your stack._
-
-_(Do not, as I once accidentally did, also have it running your merge queue 😉)_
