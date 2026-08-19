@@ -39,6 +39,7 @@ Each of these is a teaching version — adapt the specifics (repo, checks, board
 | **preflight** | The checks to run *before* a PR goes up (lint/tests/guards) so CI isn't where you find out | Every time, before you open or queue a PR |
 | **CLAUDE.md (example)** | A worked example of a project `CLAUDE.md` — the always-loaded instructions that shape every session | Setting up a new repo; encoding your conventions so you stop repeating them |
 | **trycycle** | An iterative build → test → review loop (danshapiro's public MIT tool) | Implementing something end to end with a tight feedback loop |
+| **fable-audit-prompts** | Broad audit prompts to dispatch on a cheaper model, output filed as a report | When you have a nagging "is our X good enough?" — test coverage, security, correctness, performance |
 
 **On trycycle specifically:** feed it the **GitHub issue** (`gh issue view <n>`), not the chat transcript. Its phases default to transcript placeholders, and a long session is noisy — the issue is the clean, canonical spec of what you're building.
 
@@ -46,7 +47,7 @@ Each of these is a teaching version — adapt the specifics (repo, checks, board
 
 ## Coming next (v2)
 
-More templates I'm sanitizing/writing up to add here: **orchestrator** and **merge-queue** templates, a generic **PR-review** skill, **bug-class hunting** (finding a whole *class* of bug, not one instance), **setting a ratchet** (lock in progress so regressions can't creep back), **fixing incrementally**, a **finding-something** worked example, **audit queries**, and the full **board structure**.
+More templates I'm sanitizing/writing up to add here: **orchestrator** and **merge-queue** templates, a generic **PR-review** skill, **bug-class hunting** (finding a whole *class* of bug, not one instance), **setting a ratchet** (lock in progress so regressions can't creep back), **fixing incrementally**, a **finding-something** worked example, and the full **board structure**.
 
 ---
 
