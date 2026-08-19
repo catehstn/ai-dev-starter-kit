@@ -34,6 +34,10 @@ Each of these is a teaching version — adapt the specifics (repo, checks, board
 
 | Skill | What it's for | When it's useful |
 |---|---|---|
+| **orchestrator** | Fans out and shepherds work across the board — dispatches agents, tracks, handles bounces (pairs with merge-queue) | Running several pieces of work at once without losing the thread |
+| **merge-queue** | Serial drainer that does final validation and merges one PR at a time — the impartial gate | Serializing merges (esp. if you're not on a plan with a native merge queue) |
+| **pr-review** | A structured reviewer: correctness, security (authz/PII/secrets/XSS), tests, data integrity → verdict + findings | Every PR, before it merges |
+| **bug-class-hunt** | Find and fix a whole *class* of bug, not one instance — includes **setting a ratchet** (lock in progress) and **fixing incrementally** | When you spot a bug that's really a pattern; stopping regressions from creeping back |
 | **eng-overview** | A standing read on your engineering: open PRs, recent merges, operational state | Start of day, or any time you want the state of the world without clicking through 12 tabs |
 | **daily-product-review (PM)** | Reviews the product/board from a PM lens — what's shipping, what's stuck, what needs a decision | Daily planning; keeping the product moving, not just the code |
 | **preflight** | The checks to run *before* a PR goes up (lint/tests/guards) so CI isn't where you find out | Every time, before you open or queue a PR |
@@ -52,9 +56,9 @@ The thinking behind all this, on [cate.blog](https://cate.blog):
 - [The Value of Getting Closer to the Work](https://cate.blog/2026/06/23/the-value-of-getting-closer-to-the-work/)
 - [High Throughput, Low Completion](https://cate.blog/2026/05/05/high-throughput-low-completion/) — shipping lots of PRs vs finishing things
 
-## Coming next (v2)
+## Coming next
 
-More templates I'm sanitizing/writing up to add here: **orchestrator** and **merge-queue** templates, a generic **PR-review** skill, **bug-class hunting** (finding a whole *class* of bug, not one instance), **setting a ratchet** (lock in progress so regressions can't creep back), **fixing incrementally**, a **finding-something** worked example, and the full **board structure**.
+Still to add: a **finding-something** worked example (written against a throwaway sample repo, since a real one would leak), and the full **board structure** (the status workflow + the label discipline — workflow position on the board, a `blocked:*`/`needs:setup` label for *why* something's gated, a `theme:*` label for *what area* it touches).
 
 ---
 
