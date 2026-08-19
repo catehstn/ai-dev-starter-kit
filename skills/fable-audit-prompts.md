@@ -1,6 +1,6 @@
 # Fable audit prompts
 
-Broad, structured audits you dispatch on a **capable, long-running model** (e.g. Fable) to sweep a codebase and produce a **filed, well-specified report** — findings detailed enough that **cheaper models can then execute the work**. Not a chat you have to babysit.
+Broad, structured audits you dispatch on a **capable, long-running model** (e.g. Fable) to sweep a codebase and produce a **filed, well-specified report** — findings detailed enough that **cheaper models can then execute the work**.
 
 ## The pattern
 
