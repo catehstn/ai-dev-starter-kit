@@ -1,13 +1,13 @@
 # Fable audit prompts
 
-Broad, structured audits you dispatch on a **cheaper/capable model** (e.g. Fable) to sweep a codebase and produce a **filed report** — not a chat you have to babysit.
+Broad, structured audits you dispatch on a **capable, long-running model** (e.g. Fable) to sweep a codebase and produce a **filed, well-specified report** — findings detailed enough that **cheaper models can then execute the work**. Not a chat you have to babysit.
 
 ## The pattern
 
+- **The expensive model audits; cheap models execute.** Run the broad sweep on a capable, long-running model — its job is to think hard and produce *well-specified* findings. Those findings then become work that smaller/cheaper models can carry out. You spend the expensive tokens once, on the thinking.
 - **Ask for a report, split by concern.** A good audit prompt names the dimensions up front so the output is organized and actionable, not a wall of text.
-- **Output gets filed**, not left in the chat — write it to a doc (e.g. `docs/audits/YYYY-MM-DD-<topic>.md`) so it's reviewable, diff-able, and you can turn findings into issues.
-- **Dispatch on cheaper models.** These are wide, mechanical sweeps — they don't need your most expensive model. Run them cheap and in parallel.
-- **When it's useful:** when you have a nagging "I'm not sure our X is good enough" and don't want to grind through it by hand — test coverage, security, correctness, performance. Low cost, high signal, easy to make a habit.
+- **Output gets filed**, not left in the chat — write it to a doc (e.g. `docs/audits/YYYY-MM-DD-<topic>.md`) so it's reviewable, diff-able, and each finding can become an issue for a cheaper model to pick up.
+- **When it's useful:** when you have a nagging "I'm not sure our X is good enough" and don't want to grind through it by hand — test coverage, security, correctness, performance. High signal, and the output pays for itself as executable work.
 
 > Tip: if you find yourself putting off a broad audit because you're busy, that's exactly the moment to dispatch one — the cost of asking is tiny and the report often surfaces things you'd never have gone looking for.
 
@@ -17,7 +17,7 @@ Broad, structured audits you dispatch on a **cheaper/capable model** (e.g. Fable
 
 > I'm not happy with our test coverage — we have gaps, and I'm not sure all the tests are validating what they should be. Look through this and put together an in-depth report highlighting strengths, weaknesses, and areas to invest in. Focus first on what's there, but where relevant you can also look at other forms of reliability coverage that would be good additions.
 
-_Output → filed as a report. Dispatch on a cheaper model._
+_Run the audit on the capable model; the filed report becomes work cheaper models can execute._
 
 ---
 

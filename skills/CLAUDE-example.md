@@ -17,6 +17,8 @@
 - Schema changes → write a migration and open a PR
 - Only write directly to production DB for things that genuinely cannot be done via a PR (e.g. one-off data fixes with no code equivalent, urgent hotfixes where a deploy would be too slow)
 
+**Confirm the target before any live write.** Before running a migration or a hand-run write against a live database, *verify* which environment you're pointed at — never assume. The environment name often doesn't appear in the connection string, so prefer named workflows (`migrate-staging` / `migrate-prod`) whose target comes from config and can't be mistyped. If the target isn't provably the one you expect, stop and confirm before applying.
+
 ## Code Quality Principles
 
 ### DRY (Don't Repeat Yourself)
@@ -107,6 +109,11 @@ Exception: docs-only changes the user explicitly asks to commit directly (e.g. "
 ## Full-stack changes
 
 When a change touches both the API and the UI, land them in a single PR. The PR description should note which side was tested and how.
+
+## CI verification
+
+- **Treat a single green check as provisional.** Before reporting a PR as passing — or merging it — confirm the authoritative checks have *fully concluded* green, not just started. Background/polled statuses can return false-positive completions and false `BEHIND` failures; re-verify against the checks list before acting.
+- **Re-running CI: full rerun, not `--failed`.** A partial `gh run rerun --failed` leaves stale per-attempt results and noisy `cancelled` events that misread as failures — re-run the full job set (`gh run rerun <run-id>`) and confirm the final status. Likewise, re-query fresh before declaring a queue empty; the list endpoint caches.
 
 ## PR and Issue Workflow
 

@@ -39,7 +39,7 @@ Each of these is a teaching version — adapt the specifics (repo, checks, board
 | **preflight** | The checks to run *before* a PR goes up (lint/tests/guards) so CI isn't where you find out | Every time, before you open or queue a PR |
 | **CLAUDE.md (example)** | A worked example of a project `CLAUDE.md` — the always-loaded instructions that shape every session | Setting up a new repo; encoding your conventions so you stop repeating them |
 | **trycycle** | An iterative build → test → review loop — [danshapiro/trycycle](https://github.com/danshapiro/trycycle) (public MIT) | Larger, more complex pieces of work with a tight feedback loop |
-| **fable-audit-prompts** | Broad audit prompts to dispatch on a cheaper model, output filed as a report | When you have a nagging "is our X good enough?" — test coverage, security, correctness, performance |
+| **fable-audit-prompts** | Broad audit prompts for a capable long-running model → a filed report cheaper models can execute on | When you have a nagging "is our X good enough?" — test coverage, security, correctness, performance |
 
 **On trycycle specifically:** it lives at [danshapiro/trycycle](https://github.com/danshapiro/trycycle) — clone it directly. Feed it the **GitHub issue** (`gh issue view <n>`), not the chat transcript: its phases default to transcript placeholders, and a long session is noisy — the issue is the clean, canonical spec. Best for **larger, more complex pieces of work.**
 
