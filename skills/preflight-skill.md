@@ -35,3 +35,10 @@ Ready to proceed? [confirm or redirect]
 ```
 
 Wait for explicit confirmation before making any edits.
+
+## Living document
+
+Update this skill when:
+- The pre-PR checks change (a new lint / test / guard)
+- CI starts catching something preflight should have
+- The confirm / gate flow changes

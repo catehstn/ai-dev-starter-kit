@@ -124,3 +124,10 @@ When nothing else is touching these files and the change is uniform, one PR is f
 
 - **`pr-orchestrator`** runs a board of unrelated issues, one PR per issue. In the default flow above it's the *burndown engine*: it picks up the batch sub-issues you file (§4) and drives them through review + queue. It also carries the reciprocal note — let an in-flight sweep land first and rebase narrow PRs onto it.
 - **`merge-queue`** is the serial drainer for labelled PRs. This skill (and the orchestrator) end where it begins: reviewed, green, labelled. The label is the handoff.
+
+## Living document
+
+Update this skill when:
+- A new class of bug recurs and needs its own hunt pattern
+- The ratchet mechanism changes (a new guard/check to lock in progress)
+- You find a better way to scope "the whole class" or drive the incremental fix

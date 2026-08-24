@@ -120,3 +120,10 @@ When the harness sends an agent-failure notification mid-drain ("was running whe
 - Required checks and `strict` are read live from the branch-protection config (`gh api repos/<your-org>/<your-repo>/branches/main/protection`). If they change, this skill needs no edit — it reads them live.
 - If collisions persist even with a single drainer, the next hardening step is a real mutex (e.g. a pinned "Merge queue control" issue self-assigned by the active drainer). Documented discipline first.
 - Worktree hygiene: the drain itself runs via `gh` API/CLI calls and needs no local checkout. The only exception is the post-green review agent (step 6), which uses a throwaway `--detach` worktree it must remove when done — never the main checkout (another session may be on the PR's branch).
+
+## Living document
+
+Update this skill when:
+- Your CI / final-validation gates change
+- You move to (or from) a native merge queue — e.g. GitHub Enterprise
+- A new failure mode in landing PRs emerges and needs handling

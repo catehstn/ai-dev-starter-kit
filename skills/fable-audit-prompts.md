@@ -30,3 +30,10 @@ _Run the audit on the capable model; the filed report becomes work cheaper model
 > 5. **Performance** (fetch waterfalls, rendering, bundle, caching)
 
 _Each concern is its own filed section. Adapt the sub-bullets to your stack._
+
+## Living document
+
+Update this collection when:
+- You find an audit gap — a class of problem these prompts miss
+- A new area is worth auditing (add a prompt for it)
+- The model/effort guidance changes (what runs the audit vs executes the fixes)

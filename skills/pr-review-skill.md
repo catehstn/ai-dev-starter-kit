@@ -73,3 +73,10 @@ If you emit machine-readable output, return a single structured object: a `statu
 ## Failure investigation
 
 When a check or test fails, treat the failure as a clue about the system, not a result to transcribe. Characterize its *shape* before labelling it: read the assertion, the nearby tests, the changed files, and cheap focused reruns. Don't stop at "flaky" or "environmental" unless you can explain why that label follows from the evidence and what the next round should do about it. A stale local checkout or a stale local test DB is a common false failure — rule that out (`git fetch`, refresh the schema) before attributing a failure to the diff.
+
+## Living document
+
+Update this skill when:
+- A new review dimension matters — a class of bug you keep missing
+- Your security / data-integrity checklist changes
+- The output format its consumers need shifts

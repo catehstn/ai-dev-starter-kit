@@ -312,3 +312,11 @@ docs/            # Documentation (Stripe setup, testing guide, etc.)
 - **New code must have tests.** Any new component, utility, or API route should be accompanied by tests in the same PR.
 - **Run `npm run test:run` before every push to GitHub.** Do not push if tests are failing.
 - **Never assert on Tailwind class strings.** Tests that check for specific classes (e.g. `pt-[22px]`, `bg-indigo-600`) break any time spacing or styling is tweaked, even when the component is structurally correct. Instead assert on DOM structure (child count, element presence), text content, ARIA roles, or `data-testid` attributes — things that reflect what the user actually sees.
+
+## Keep this file alive
+
+A `CLAUDE.md` is a living document — the whole point is to update it as you learn. Add to it whenever:
+- You catch yourself re-explaining the same convention to the AI (encode it once)
+- A new tool, workflow, or guard enters the repo
+- The AI repeats a mistake worth preventing (write the rule that stops it)
+- A rule here goes stale (delete it — a wrong instruction is worse than none)

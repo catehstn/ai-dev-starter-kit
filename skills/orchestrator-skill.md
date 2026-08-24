@@ -143,3 +143,10 @@ Before stopping: confirm nothing is unpushed or stranded (every branch pushed, e
 
 - Pairs with `merge-queue` — read that skill to understand the drain side and the exact label mechanics. This skill stops at the label; that one starts there.
 - These are patterns, not rigid steps — scale the ceremony to the work. A one-line copy fix doesn't need an adversarial review; a permission change does. Use judgment about where the risk actually is.
+
+## Living document
+
+Update this skill when:
+- The set of roles / terminals changes
+- Dispatch or bounce-handling patterns evolve
+- The board workflow it orbits changes

@@ -118,3 +118,10 @@ When creating tasks on the roadmap board, include:
 - Channels without automation need manual triage on every scan.
 - Automated bots posting in channels may be real signal (e.g. user feedback bots) — treat accordingly.
 - Standup reminders may fire on weekends — don't flag weekend gaps.
+
+## Living document
+
+Update this skill when:
+- The board/product surfaces change (new stages, new sources of truth)
+- A new signal matters for the PM read (a metric, a stuck-state, a decision type)
+- Your planning cadence shifts

@@ -49,3 +49,10 @@ Give every open issue exactly one theme (e.g. `theme:payments`, `theme:growth`, 
 ## Why this matters more with agents
 
 When you're the only one working, an informal board is fine. The moment you're running orchestrated agents, the board *is* the coordination layer: it's how the orchestrator knows what's `Ready`, how the merge queue reports what's `Done`, and how you keep judgment (`Needs human`) from getting lost in the throughput. Structure here buys you legibility everywhere else.
+
+## Living document
+
+Update this skill when:
+- Your status workflow changes (a column added/renamed, a new gate)
+- The label axes shift (new gating reasons, new areas of the codebase)
+- The orchestrator or merge-queue need a new signal from the board
