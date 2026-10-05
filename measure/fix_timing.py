@@ -134,7 +134,7 @@ def change_base(clone, sha, row):
 def changed_hunks(clone, base, sha):
     """{(old_path, new_path): [(start, count) in the old file]} for a diff, following renames."""
     out, old, new, header = {}, None, None, False
-    for l in prdata.git(clone, 'diff', '-U0', '-M', base, sha).splitlines():
+    for l in prdata.git(clone, 'diff', '-U0', '-M', '--src-prefix=a/', '--dst-prefix=b/', base, sha).splitlines():
         if l.startswith('diff --git '):
             old = new = None
             header = True  # ---/+++ lines are file names only here, before the first hunk

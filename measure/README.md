@@ -96,6 +96,7 @@ Reports only use rows with `ci_status=ok`, and say how many they left out.
 - **Big PRs are errors, not undercounts.** The GitHub API lists at most 250 commits and 3,000 files per PR. `ci_enrich.py` compares the lists to the PR's totals and marks the row as an error if they don't match.
 - **Fix timing needs a release ref that records when each release happened.** "In prod" means reachable from that ref, with the same SHAs as main.
   - `--release-branch` works if promotions are merge commits on the release branch (`git merge --no-ff`, or a PR merged with a merge commit). Each promotion is dated by its merge commit.
+  - The fast-forward check compares against `--main-branch`, which defaults to `origin/HEAD`. Some clones don't have that ref: run `git remote set-head origin -a` once, or pass `--main-branch origin/main`.
   - A fast-forwarded release branch doesn't work: git keeps no record of when it moved, so code would read as shipped when it merged to main. The script warns if the branch looks fast-forwarded. Use `--release-tags` instead.
   - `--release-tags` wants annotated tags (`git tag -a`), dated by the tagger. Lightweight tags only carry the commit date; the script warns and the split is approximate.
   - Cherry-picking onto the release branch makes new SHAs, so everything reads as caught before release.

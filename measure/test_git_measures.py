@@ -139,6 +139,21 @@ class FixTiming(unittest.TestCase):
         self.assertEqual(warnings, [])
         self.check(out)
 
+    def test_user_diff_noprefix_config(self):
+        # diff.noprefix=true drops the a/ b/ prefixes the parser expects unless we pin them
+        keys = {'GIT_CONFIG_COUNT': '1', 'GIT_CONFIG_KEY_0': 'diff.noprefix', 'GIT_CONFIG_VALUE_0': 'true'}
+        saved = {k: os.environ.get(k) for k in keys}
+        os.environ.update(keys)
+        try:
+            out, _ = self.classify_all(branch='release')
+        finally:
+            for k, v in saved.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+        self.check(out)
+
     def test_lightweight_tags_warn(self):
         _, warnings = fix_timing.release_points(self.r.path, tags='lw*')
         self.assertEqual(len(warnings), 1)
