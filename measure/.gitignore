@@ -1,0 +1,3 @@
+# output of the scripts: your repo's data, keep it out of git
+*.csv
+__pycache__/
