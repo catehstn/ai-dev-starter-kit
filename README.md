@@ -44,6 +44,7 @@ Each of these is a teaching version — adapt the specifics (repo, checks, board
 | **preflight** | The checks to run *before* a PR goes up (lint/tests/guards) so CI isn't where you find out | Every time, before you open or queue a PR |
 | **CLAUDE.md (example)** | A worked example of a project `CLAUDE.md` — the always-loaded instructions that shape every session | Setting up a new repo; encoding your conventions so you stop repeating them |
 | **fable-audit-prompts** | Broad audit prompts for a capable long-running model → a filed report cheaper models can execute on | When you have a nagging "is our X good enough?" — test coverage, security, correctness, performance |
+| **[measure/](measure/)** (scripts) | Pulls your repo's merged PRs and CI data, then reports: kind of work per month, CI effort per PR, guardrail growth, safety ratio, and whether fixes land before or after release | Monthly, or whenever you want a non-human read on whether the guardrails are keeping up with the throughput |
 
 ---
 
