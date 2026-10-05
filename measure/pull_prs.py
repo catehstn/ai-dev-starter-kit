@@ -18,6 +18,29 @@ import prdata
 FIELDS = 'number,title,author,createdAt,mergedAt,additions,deletions,baseRefName,headRefOid,mergeCommit'
 
 
+def merge_rows(existing, fresh, recategorise=False):
+    """Fold freshly pulled rows into existing ones, by PR number.
+
+    Existing rows keep their CI columns. Title-derived columns are refreshed, except a
+    category that no longer matches what the categoriser says for the old title: that was
+    edited by hand, so it stays (unless recategorise).
+    """
+    merged = {n: dict(r) for n, r in existing.items()}
+    for n, row in fresh.items():
+        old = merged.get(n)
+        if old:
+            keep_cat = old['category'] != prdata.categorise(old['title'])
+            for c in prdata.PR_COLUMNS:
+                if not (c == 'category' and keep_cat):
+                    old[c] = row[c]
+        else:
+            merged[n] = {**row, **{c: '' for c in prdata.CI_COLUMNS}}
+    if recategorise:
+        for r in merged.values():
+            r['category'] = prdata.categorise(r['title'])
+    return merged
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--repo', required=True, help='owner/name')
@@ -51,20 +74,7 @@ def main():
     if os.path.exists(a.out) and not a.replace:
         existing = {r['number']: r for r in prdata.read_prs(a.out)}
 
-    merged = dict(existing)
-    for n, row in fresh.items():
-        old = existing.get(n)
-        if old:
-            keep_cat = old['category'] != prdata.categorise(old['title'])  # hand-edited
-            for c in prdata.PR_COLUMNS:
-                if not (c == 'category' and keep_cat):
-                    old[c] = row[c]
-        else:
-            merged[n] = {**row, **{c: '' for c in prdata.CI_COLUMNS}}
-
-    if a.recategorise:
-        for r in merged.values():
-            r['category'] = prdata.categorise(r['title'])
+    merged = merge_rows(existing, fresh, a.recategorise)
     if existing and len(merged) < len(existing):
         sys.exit('Row count went down; refusing to write.')  # belt and braces
     prdata.write_prs(a.out, list(merged.values()))

@@ -143,8 +143,13 @@ class Paced:
         return json.loads(self.gh(*args))
 
 
+def git_run(clone, *args):
+    """Run git, return the CompletedProcess (callers that must notice failures use this)."""
+    return subprocess.run(['git', '-C', clone, *args], capture_output=True, text=True)
+
+
 def git(clone, *args, check=False):
-    p = subprocess.run(['git', '-C', clone, *args], capture_output=True, text=True)
+    p = git_run(clone, *args)
     if check and p.returncode != 0:
         sys.exit(f"git {' '.join(args)} failed in {clone}: {p.stderr.strip()}")
     return p.stdout

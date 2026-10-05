@@ -3,8 +3,11 @@
 
     python3 ci_enrich.py --repo owner/name [--csv prs.csv] [--only 12,34] [--refresh] [--check]
 
-For each PR: one call for its commits and changed files, then one call per commit for
-the number of check runs on it. Paced at ~1s per call, so a few thousand calls is an
+For each PR: one call for its totals, paged calls for its commits and changed files
+(REST, 100 per page), then one call per commit for the number of check runs on it.
+The commit and file lists are checked against the PR's own totals, so a truncated list
+(`gh pr view` stops at 100 files; the REST API stops at 250 commits and 3,000 files)
+becomes an error row, not an undercount. Paced at ~1s per call, so a few thousand calls is an
 hour or so. Progress is saved every 10 PRs; re-running picks up where it stopped (only
 rows without ci_status=ok are fetched, unless --refresh or --only).
 
@@ -19,11 +22,17 @@ import prdata
 
 
 def enrich(api, repo, row):
-    view = api.gh_json('pr', 'view', row['number'], '--repo', repo, '--json', 'commits,files')
-    shas = [c['oid'] for c in view.get('commits', [])]
-    test_files = sum(1 for f in view.get('files', []) if prdata.is_test_path(f.get('path')))
+    n = row['number']
+    pr = api.gh_json('api', f'repos/{repo}/pulls/{n}')
+    shas = api.gh('api', '--paginate', f'repos/{repo}/pulls/{n}/commits?per_page=100', '--jq', '.[].sha').split()
+    paths = api.gh('api', '--paginate', f'repos/{repo}/pulls/{n}/files?per_page=100', '--jq', '.[].filename').splitlines()
     if not shas:
-        raise RuntimeError('gh returned 0 commits')
+        raise RuntimeError('API returned 0 commits')
+    if len(shas) != pr['commits']:
+        raise RuntimeError(f"got {len(shas)} of {pr['commits']} commits (API caps the list at 250)")
+    if len(paths) != pr['changed_files']:
+        raise RuntimeError(f"got {len(paths)} of {pr['changed_files']} files (API caps the list at 3000)")
+    test_files = sum(1 for p in paths if prdata.is_test_path(p))
     counts = []
     for sha in shas:
         out = api.gh('api', f'repos/{repo}/commits/{sha}/check-runs?per_page=1', '--jq', '.total_count')

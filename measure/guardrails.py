@@ -4,7 +4,8 @@
     python3 guardrails.py --clone ~/src/myrepo --since 2026-01-01 [--until 2026-06-30]
                           [--branch origin/HEAD] [--csv prs.csv]
 
-For each month end, takes the last commit on --branch before that day and counts:
+For each month end, takes the last commit on --branch's first-parent history (what had
+landed on the branch) at or before 23:59:59 UTC that day, and counts:
   claude_md_lines  lines across every file matching --instructions (default: any CLAUDE.md)
   guard_scripts    files matching --guards (purpose-built checks your CI or hooks run)
   agent_hooks      files under .claude/hooks/
@@ -26,7 +27,10 @@ import prdata
 
 
 def snapshot(clone, branch, day, instr_re, guard_re):
-    sha = prdata.git(clone, 'rev-list', '-1', f'--before={day.isoformat()} 23:59:59', branch).strip()
+    # --first-parent: only what had landed on the branch by then, not side-branch commits
+    # authored earlier and merged later. The cutoff is end of day UTC.
+    sha = prdata.git(clone, 'rev-list', '-1', '--first-parent',
+                     f'--before={day.isoformat()} 23:59:59 +0000', branch).strip()
     if not sha:
         return None
     files = prdata.git(clone, 'ls-tree', '-r', '--name-only', sha).splitlines()
